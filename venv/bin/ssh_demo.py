@@ -20,7 +20,12 @@ client = paramiko.SSHClient()
 client.load_system_host_keys()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 client.connect('test.rebex.net',username='demo',password='password')
-(stdin, stdout, stderr) = client.exec_command("ls -al")
-for line in stdout.readlines():
-        print line
+
+while True:
+        text = raw_input("prompt")  # Python 2
+
+        (stdin, stdout, stderr) = client.exec_command(text)
+        for line in stdout.readlines():
+                print line
+
 client.close()
